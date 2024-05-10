@@ -1,9 +1,0 @@
-argparse
-pandas
-requests
-matplotlib
-numpy
-socceraction
-warnings
-xgboost
-tqdm
