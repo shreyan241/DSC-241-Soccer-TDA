@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 19 2020
-
-Code borrowed and adapted from https://github.com/ML-KULeuven/socceraction
-
-@author: Sergio Llana (@SergioMinuto90)
-"""
-
 
 import socceraction.classification.features as fs
 import socceraction.classification.labels as lab
