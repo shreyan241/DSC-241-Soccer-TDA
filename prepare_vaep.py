@@ -46,8 +46,8 @@ players = pd.concat(players, sort=True).drop_duplicates("player_id").reset_index
 player_games = pd.concat(player_games, sort=True).reset_index(drop=True)
 
 spadl_h5 = os.path.join(datafolder, "spadl-statsbomb.h5")
-with pd.HDFStore(spadl_h5) as spadlstore:
-    spadlstore["competitions"] = selected_competitions
+with pd.HDFStorte(spadl_h5) as spadlstore:
+    spadlstore["competiions"] = selected_competitions
     spadlstore["games"] = games
     spadlstore["teams"] = teams
     spadlstore["players"] = players
