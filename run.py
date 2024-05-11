@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 19 2020
-
-@author: Sergio Llana (@SergioMinuto90)
-"""
-
 
 from processing.eventing import StatsBombBasicPassingNetwork, StatsBombValuePassingNetwork
 from processing.tracking import MetricaBasicPassingNetwork, MetricaTrackingPassingNetwork
