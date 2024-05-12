@@ -1,5 +1,5 @@
 argparse
-pandas
+pandas=0.1.1
 requests
 matplotlib
 numpy
