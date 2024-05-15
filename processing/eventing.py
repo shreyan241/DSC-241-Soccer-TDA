@@ -147,12 +147,20 @@ class StatsBombValuePassingNetwork(StatsBombPassingNetwork):
         # We select all successful passes done by the selected team before the minute
         # of the first substitution or red card.
         df_passes = self.df_events[(self.df_events.type_name == "Pass") &
-                                   (self.df_events.pass_outcome_name.isna()) &
-                                   (self.df_events.team_name == self.team_name) &
-                                   (self.df_events.minute < self.num_minutes)].copy()
+                                   # (self.df_events.pass_outcome_name.isna()) &
+                                   (self.df_events.team_name == self.team_name)
+                                   # (self.df_events.minute < self.num_minutes)
+                                   ].copy()
+
+        def get_name_or_default(name):
+            if not name or pd.isna(name):  # Checks if name is None or NaN
+                return None
+            return self.names_dict.get(name, name)  # Safely gets the value from the dictionary or returns the name itself
+
+        df_passes["pass_recipient_name"] = df_passes["pass_recipient_name"].apply(get_name_or_default)
 
         # If available, use player's nickname instead of full name to optimize space in plot
-        df_passes["pass_recipient_name"] = df_passes.pass_recipient_name.apply(lambda x: self.names_dict[x] if self.names_dict[x] else x)
+        # df_passes["pass_recipient_name"] = df_passes.pass_recipient_name.apply(lambda x: self.names_dict[x] if self.names_dict[x] else x)
         df_passes["player_name"] = df_passes.player_name.apply(lambda x: self.names_dict[x] if self.names_dict[x] else x)
 
         # Set the VAEP metric to each pass
@@ -183,6 +191,9 @@ class StatsBombValuePassingNetwork(StatsBombPassingNetwork):
         self.player_position = df_passes.groupby("player_name").agg({"origin_pos_x": "median", "origin_pos_y": "median"})
 
         # 'pair_key' combines the names of the passer and receiver of each pass (sorted alphabetically)
-        df_result["pair_key"] = df_result.apply(lambda x: "_".join(sorted([x["player_name"], x["pass_recipient_name"]])), axis=1)
+        # df_result["pair_key"] = df_result.apply(lambda x: "_".join(sorted([x["player_name"], x["pass_recipient_name"]])), axis=1)
+        df_result["pair_key"] = df_result.apply(lambda x: ("_".join(sorted([x["player_name"], x["pass_recipient_name"]]))
+                if x["player_name"] is not None and x["pass_recipient_name"] is not None
+                else None), axis=1)
         self.pair_pass_value = df_result.groupby("pair_key").agg(pass_value=("vaep_value", "mean"))
         self.pair_pass_count = df_result.groupby("pair_key").size().to_frame("num_passes")
