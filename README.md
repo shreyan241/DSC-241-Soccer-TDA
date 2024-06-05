@@ -1,17 +1,11 @@
-# passing-networks-in-python
+# DSC-241: Project Report - "Predicting Match Outcome using Topological Features of Passing Networks in Soccer"
 
-Repository for building customizable passing networks with Matplotlib as part of the "Friends of Tracking" series. The code is prepared to use both eventing (StatsBomb) and tracking data (Metrica Sports).
-
-![Example of a passing network](plots/statsbomb_match7576_Portugal_pass_value.png)
+![Example of a passing network](plots/sample_PN.jpeg)
 
 The sample data can be found in the following repositories: 
 * StatsBomb: https://github.com/statsbomb/open-data
-* Metrica Sports: https://github.com/metrica-sports/sample-data
 
 Also, further information about the VAEP metric can be found in this repository: https://github.com/ML-KULeuven/socceraction
-
-Video tutorial: https://www.youtube.com/watch?v=JZ6Jc-cvKX8
-
 
 ### How to run this piece of software?
 
@@ -42,10 +36,5 @@ In addition, the colors and sizes of the elements in networks can be configured 
 
 StatsBomb: `python3 run.py -m 7576 -t Portugal -s eventing -k pass_value`
 
-Metrica: `python3 run.py -m 1 -t Home -s tracking -k tracking -c attacking -b opponent_half`
-
 The resulting images will be saved onto the _plots_ folder.
 
-### Contact information
-
-For further information, please contact me on Twitter: [@SergioMinuto90](https://twitter.com/SergioMinuto90).
